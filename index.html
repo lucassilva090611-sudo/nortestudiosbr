@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Norte Studio</title>
+<style>
+:root{--ac:#1d4ed8;--tx:#0b0b0f;--mut:#5b6472;--bd:#dbe3f0}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--tx);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+h1,h2,h3{font-family:Georgia,'Times New Roman',serif;margin:0}
+a{color:var(--ac)}
+header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#0b0b0f;position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;font:600 20px Georgia,serif}
+.logo{height:52px;max-width:170px;object-fit:contain;background:#fff;border-radius:8px;padding:4px;display:block}
+.logoph{height:52px;width:130px;border:2px dashed #5b6472;border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;font:12px system-ui;color:#c9d3e6}
+#burger{background:none;border:0;color:#fff;font-size:30px;line-height:1;cursor:pointer;padding:4px 8px}
+#menu{position:absolute;right:14px;top:64px;background:#fff;border:1px solid var(--bd);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.2);display:none;min-width:200px;overflow:hidden}
+#menu button{display:block;width:100%;text-align:left;background:#fff;border:0;border-bottom:1px solid var(--bd);padding:14px 18px;font:inherit;cursor:pointer}
+#menu button:last-child{border:0}
+.hero{text-align:center;padding:70px 20px;background:linear-gradient(#fff,#e6eeff)}
+.hero h1{font-size:clamp(34px,8vw,56px)}
+.hero p{max-width:600px;margin:14px auto 24px;color:var(--mut);font-size:18px}
+.btn{display:inline-block;background:var(--ac);color:#fff;border:0;border-radius:999px;padding:11px 24px;font:600 15px system-ui;text-decoration:none;cursor:pointer;margin:4px}
+.btn.o{background:#fff;color:var(--ac);border:2px solid var(--ac)}
+.wrap{max-width:760px;margin:0 auto;padding:44px 20px}
+.wrap h2{font-size:28px;margin-bottom:12px}
+.wrap p{white-space:pre-line}
+footer{text-align:center;font-size:11px;color:#9aa4b5;background:#0b0b0f;padding:22px 10px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:30;overflow:auto;padding:16px;display:none}
+.bx{background:#fff;max-width:520px;margin:20px auto;border-radius:14px;padding:20px}
+.bx h2{margin-bottom:12px}
+.bx input,.bx textarea{width:100%;padding:10px;margin:4px 0 10px;border:1px solid var(--bd);border-radius:8px;font:inherit}
+.bx label{font-size:13px;color:var(--mut)}
+.ct{display:block;border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:10px;text-decoration:none;color:var(--tx)}
+.ct small{display:block;color:var(--mut)}
+.ach{border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:10px}
+.ach small{color:var(--mut)}.ach p{margin:6px 0 0;white-space:pre-line}
+.muted{color:var(--mut)}
+.x{float:right;background:none;border:0;font-size:22px;cursor:pointer}
+.dl{color:#c0392b;background:none;border:1px solid #c0392b;border-radius:8px;padding:3px 10px;margin-top:8px;cursor:pointer}
+#bar{position:fixed;right:14px;bottom:14px;z-index:20}
+#toast{position:fixed;left:50%;bottom:70px;transform:translateX(-50%);background:#0b0b0f;color:#fff;padding:9px 14px;border-radius:8px;display:none;z-index:50}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand" id="brand"></div>
+  <button id="burger" aria-label="Menu">☰</button>
+</header>
+<div id="menu">
+  <button data-o="contato">Contato</button>
+  <button data-o="conq">Nossas conquistas</button>
+</div>
+
+<div class="hero">
+  <h1>Norte Studio</h1>
+  <p>Uma organização criada com um intuito, lapidada para promover a acessibilidade que seu estabelecimento merece.</p>
+  <button class="btn" data-o="contato">Fale com a gente</button>
+</div>
+<div class="wrap">
+  <h2>Quem somos</h2>
+  <p id="about"></p>
+  <div id="aedit" style="display:none"><textarea id="a_t" rows="5" style="width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;font:inherit"></textarea><button class="btn" id="a_s">Salvar texto</button></div>
+</div>
+<footer id="foot"></footer>
+<div id="bar"></div>
+
+<div class="ov" id="o_contato"><div class="bx"><button class="x" data-c>✕</button><h2>Contato</h2>
+  <a class="ct" href="tel:+557199559960"><small>Telefone</small>+55 71 9955-9960</a>
+  <a class="ct" href="mailto:norte.studio.br@gmail.com"><small>E-mail</small>norte.studio.br@gmail.com</a></div></div>
+
+<div class="ov" id="o_conq"><div class="bx"><button class="x" data-c>✕</button><h2>Nossas conquistas</h2>
+  <div id="cl"></div>
+  <div id="cform" style="display:none"><h3 style="margin:16px 0 8px">Nova conquista</h3>
+    <label>Título</label><input id="c_t" placeholder="Ex.: Nosso primeiro trabalho">
+    <label>Data ou período (opcional)</label><input id="c_d">
+    <label>Descrição (opcional)</label><textarea id="c_x" rows="3"></textarea>
+    <button class="btn" id="c_s">Adicionar conquista</button></div></div></div>
+
+<div class="ov" id="o_login"><div class="bx" style="max-width:360px"><button class="x" data-c>✕</button><h2>Acesso restrito</h2>
+  <label>E-mail</label><input id="l_e" type="email" autocomplete="username">
+  <label>Senha</label><input id="l_p" type="password" autocomplete="current-password">
+  <div id="l_er" style="color:#c0392b;font-size:14px;min-height:20px"></div>
+  <button class="btn" id="l_go">Entrar</button></div></div>
+<div id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyBSkfqwpnGfaPtA2xi4cyPpc8KJqB_TGqA",
+  authDomain: "nortepaes-c95ae.firebaseapp.com",
+  projectId: "nortepaes-c95ae",
+  storageBucket: "nortepaes-c95ae.firebasestorage.app",
+  messagingSenderId: "1045224066552",
+  appId: "1:1045224066552:web:9fba82b1990aa82c061a0d"
+};
+const DEF_ABOUT = "A Norte é uma organização recente, fundada por três colegas. Nosso objetivo é promover, de maneira acessível, a acessibilidade para o seu estabelecimento.";
+let db, auth, cfg = {}, achs = [], admin = false;
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(m){ const t = $('#toast'); t.textContent = m; t.style.display = 'block'; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.display = 'none', 3000); }
+function shrink(file, max){
+  return new Promise((res, rej) => {
+    const im = new Image(), u = URL.createObjectURL(file);
+    im.onload = () => { const k = Math.min(1, max / Math.max(im.width, im.height)), c = document.createElement('canvas'); c.width = Math.round(im.width * k); c.height = Math.round(im.height * k); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); URL.revokeObjectURL(u); res(c.toDataURL('image/png')); };
+    im.onerror = rej; im.src = u;
+  });
+}
+const open = id => { $('#menu').style.display = 'none'; $('#' + id).style.display = 'block'; };
+document.querySelectorAll('[data-o]').forEach(b => b.onclick = () => open('o_' + b.dataset.o));
+document.querySelectorAll('[data-c]').forEach(b => b.onclick = () => { b.closest('.ov').style.display = 'none'; });
+$('#burger').onclick = e => { e.stopPropagation(); const m = $('#menu'); m.style.display = m.style.display === 'block' ? 'none' : 'block'; };
+document.addEventListener('click', e => { if (!e.target.closest('#menu')) $('#menu').style.display = 'none'; });
+
+function render(){
+  const lg = cfg.logo ? `<img class="logo" alt="Norte Studio" src="${esc(cfg.logo)}">` : `<div class="logoph">${admin ? '📷 Toque para enviar a logo' : 'Sua logo aqui'}</div>`;
+  $('#brand').innerHTML = (admin ? `<label style="cursor:pointer">${lg}<input type="file" id="q_logo" accept="image/*" hidden></label>` : lg) + (cfg.logo ? '' : '<span>Norte Studio</span>');
+  if (admin) $('#q_logo').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { await db.doc('norte/config').set({logo: await shrink(f, 400)}, {merge: true}); toast('Logo atualizada! ✅'); } catch(x){ toast('Erro ao enviar a logo.'); } };
+  $('#about').textContent = cfg.about || DEF_ABOUT;
+  $('#aedit').style.display = admin ? 'block' : 'none';
+  if (admin && document.activeElement !== $('#a_t')) $('#a_t').value = cfg.about || DEF_ABOUT;
+  $('#foot').textContent = `© ${new Date().getFullYear()} Norte Studio · direitos reservados`;
+  $('#cform').style.display = admin ? 'block' : 'none';
+  $('#cl').innerHTML = achs.length ? achs.map(a => `<div class="ach"><h3>${esc(a.title)}</h3>${a.date ? `<small>${esc(a.date)}</small>` : ''}${a.desc ? `<p>${esc(a.desc)}</p>` : ''}${admin ? `<button class="dl" data-d="${a.id}">Excluir</button>` : ''}</div>`).join('') : '<p class="muted">Em breve, por aqui, as conquistas da Norte.</p>';
+  document.querySelectorAll('[data-d]').forEach(b => b.onclick = async () => { if (confirm('Excluir esta conquista?')) try { await db.doc('norte_conquistas/' + b.dataset.d).delete(); } catch(e){ toast('Erro ao excluir.'); } });
+  $('#bar').innerHTML = admin ? '<button class="btn o" id="b_out">Sair</button>' : '';
+  if (admin) $('#b_out').onclick = () => auth.signOut();
+}
+$('#a_s').onclick = async () => { try { await db.doc('norte/config').set({about: $('#a_t').value.trim()}, {merge: true}); toast('Texto salvo! ✅'); } catch(e){ toast('Erro ao salvar.'); } };
+$('#c_s').onclick = async () => {
+  const title = $('#c_t').value.trim(); if (!title) return toast('Informe o título.');
+  try { await db.collection('norte_conquistas').add({title, date: $('#c_d').value.trim(), desc: $('#c_x').value.trim(), created: Date.now()}); ['c_t','c_d','c_x'].forEach(i => $('#' + i).value = ''); toast('Conquista adicionada! ✅'); } catch(e){ toast('Erro ao salvar.'); }
+};
+
+/* login */
+function showLogin(){ if (!db){ toast('O Firebase não conectou. Confira a configuração.'); return; } $('#o_login').style.display = 'block'; }
+function checkHash(){ if (location.hash.toLowerCase() === '#admin' && !admin) showLogin(); }
+window.addEventListener('hashchange', checkHash);
+let taps = [];
+$('#foot').onclick = () => { const n = Date.now(); taps = taps.filter(t => n - t < 3000); taps.push(n); if (taps.length >= 5){ taps = []; if (!admin) showLogin(); } };
+$('#l_p').onkeydown = e => { if (e.key === 'Enter') $('#l_go').click(); };
+$('#l_go').onclick = async () => { try { await auth.signInWithEmailAndPassword($('#l_e').value.trim(), $('#l_p').value); $('#l_p').value = ''; $('#o_login').style.display = 'none'; } catch(e){ $('#l_er').textContent = 'E-mail ou senha incorretos.'; } };
+
+function boot(){
+  render();
+  try { firebase.initializeApp(FIREBASE_CONFIG); db = firebase.firestore(); auth = firebase.auth(); } catch(e){ setTimeout(checkHash, 300); return; }
+  db.doc('norte/config').onSnapshot(d => { cfg = d.exists ? d.data() : {}; render(); });
+  db.collection('norte_conquistas').onSnapshot(s => { achs = s.docs.map(d => ({id: d.id, ...d.data()})).sort((a,b) => (b.created||0) - (a.created||0)); render(); });
+  auth.onAuthStateChanged(u => { admin = !!u; if (admin) $('#o_login').style.display = 'none'; render(); });
+  checkHash();
+}
+boot();
+</script>
+</body>
+</html>
